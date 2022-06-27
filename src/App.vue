@@ -1,13 +1,17 @@
 <script setup>
 import {defineAsyncComponent, computed} from 'vue';
 import {useRoute} from 'vue-router'
+import Preloader from './views/layouts/PreloaderLayouts.vue';
 
 const layout = computed(() => {
     const layoutName = useRoute().meta.layout ?? 'SiteLayout';
 
-    return defineAsyncComponent(() => import(`./views/layouts/${ layoutName }.vue`));
-});
+    return defineAsyncComponent({
+        loader: () => import(`./views/layouts/${ layoutName }.vue`),
 
+        loadingComponent: Preloader
+    });
+});
 </script>
 
 <template>
