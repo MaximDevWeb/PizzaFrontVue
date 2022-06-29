@@ -1,16 +1,9 @@
-.logo {
-    padding: 1.5rem 0 1rem;
-}
-
 .logo__image {
     height: 48px;
     width: auto;
 }
 
 @media screen and (max-width: 768px){
-    .logo {
-        padding: 0.5rem 0;
-    }
 
     .logo__image {
         height: 30px;
