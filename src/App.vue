@@ -1,19 +1,19 @@
 <script setup>
-import {defineAsyncComponent, computed} from 'vue';
+import {defineAsyncComponent, markRaw, ref, watch} from 'vue';
 import {useRoute} from 'vue-router'
-import Preloader from './views/layouts/PreloaderLayouts.vue';
 import './assets/styles/app.scss';
 
-const layout = computed(() => {
-    const layoutName = useRoute().meta.layout ?? 'SiteLayout';
+import SiteLayout from './views/layouts/SiteLayout.vue';
 
-    return defineAsyncComponent({
-        loader: () => import(`./views/layouts/${ layoutName }.vue`),
+const route = useRoute();
+const layout = markRaw(SiteLayout);
 
-        loadingComponent: Preloader,
-        delay: 300
-    });
+watch(route, async(route) => {
+    if (route.meta.layout) {
+        layout.value = defineAsyncComponent(`./views/layouts/${ route.meta.layout }.vue`)
+    }
 });
+
 </script>
 
 <template>

@@ -1,3 +1,58 @@
+// Импорт стилей tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Импорт шрифта
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
+
+// Импорт переменных
+@import "src/assets/styles/variable";
+
+// Импорт стилей общих компонентов
+@import "ui/card";
+@import "ui/rating";
+@import "ui/form";
+@import "ui/button";
+
+// Импорт стилей страниц
+@import "pages/site/contacts";
+
+// Общие стили
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+.container {
+    padding: 0;
+}
+
+.page__content {
+    padding: 3rem 0 6rem;
+}
+
+a {
+    transition: all 0.3s;
+
+    &:hover {
+        color: $orange;
+    }
+}
+
+a.link_orange {
+    color: $orange;
+
+    &:hover {
+        color: $orange-hover;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .container {
+        padding: 0 1rem;
+    }
+
+    .page__content {
+        padding: 1.5rem 0;
+    }
+}
