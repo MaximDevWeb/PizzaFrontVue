@@ -3,6 +3,7 @@ import {computed} from "vue";
 import {useRoute} from "vue-router";
 import Rating from "../../../../../components/ui/rating/Rating.vue";
 import Icon from "../../../../../components/ui/icon/Icon.vue";
+import lodash from "lodash";
 
 const route = useRoute();
 
@@ -15,6 +16,21 @@ const link = computed(() => {
     return `${ currentLink }/${ props.address.alias }`;
 });
 
+const rating = computed(() => {
+    const stars = [];
+    const timer = [];
+
+    props.address.ratings.forEach(rating => {
+        stars.push(rating.stars);
+        timer.push(rating.timer);
+    })
+
+    return {
+        stars: lodash.ceil(lodash.mean(stars), 2),
+        timer: lodash.ceil(lodash.mean(timer))
+    }
+})
+
 </script>
 
 <template>
@@ -24,7 +40,14 @@ const link = computed(() => {
             <icon class="md:hidden block h-6 w-6" name="arrow-right" />
         </router-link>
 
-        <rating class="md:mt-0 mt-4 md:text-base text-lg" :rating="address.rating" />
+        <rating class="md:mt-0 mt-4 md:text-base text-lg" :rating="rating" />
+
+        <p class="mt-4" v-if="address.metro">
+            <span class="text-red-500 font-bold">
+                М
+            </span>
+            {{ address.metro }}
+        </p>
 
         <p class="mt-4">{{ address.address }}</p>
 

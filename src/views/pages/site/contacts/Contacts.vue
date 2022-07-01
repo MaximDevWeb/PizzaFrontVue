@@ -1,22 +1,16 @@
 <script setup>
-import {computed, onMounted, reactive} from "vue";
-import {useRoute, useRouter} from "vue-router";
-import {useCitiesStore} from "../../../../stores/cities.js";
+import {computed, reactive} from "vue";
+import {useRouter} from "vue-router";
 import {DateMoment} from "../../../../modules/DateMoment";
-import CityContact from "./components/CityContact.vue";
 import PhoneContact from "./components/PhoneContact.vue";
 import ItemContact from "./components/ItemContact.vue";
 import Input from "../../../../components/ui/form/Input.vue";
 import CheckBox from "../../../../components/ui/form/CheckBox.vue";
 import Head from "../../../../components/ui/head/Head.vue";
+import {useCitiesStore} from "../../../../stores/cities";
 
-const cities = useCitiesStore();
-const route = useRoute();
 const router = useRouter();
-
-/**
- * Реактивные свойства
- */
+const cities = useCitiesStore();
 
 const state = reactive({
     search : '',
@@ -24,33 +18,17 @@ const state = reactive({
     workingNow: false
 });
 
-/**
- * Вычисляемые свойства
- */
-
-const cityAlias = computed(() => {
-    return route.params.city;
-});
-
-const city = computed(() => {
-    return cities.getByAlias(cityAlias.value);
+const city = computed( () => {
+    return cities.getCity;
 });
 
 const addresses = computed(() => {
     const addresses = city.value.addresses;
 
-    /**
-     * Фильтрация по поисковому запросу
-     */
-
     let filtered = addresses.filter(address => {
         let search = RegExp(state.search, 'i');
-        return search.test(address.title) || search.test(address.address);
+        return search.test(address.title) || search.test(address.address) || search.test(address.metro);
     });
-
-    /**
-     * Фильтрация по чекбоксам
-     */
 
     if(state.fullDay) {
         filtered = filtered.filter(address => {
@@ -84,30 +62,10 @@ const filterResultString = computed(() => {
         return ''
     }
 });
-
-/**
- * Хук создание компонента
- */
-
-onMounted(() => {
-
-    /**
-     * Делаем переадресацию если у контактов
-     * только один адресс
-     */
-    if (city.value.addresses.length < 2) {
-        const streetAlias = city.value.addresses[0].alias;
-        const url = `${ route.fullPath }/${ streetAlias }`;
-
-        router.push(url);
-    }
-
-});
-
 </script>
 
 <template>
-    <div class="page__content">
+    <div class="page__content" v-if="city">
         <div class="contacts__header">
             <div>
                 <Head>{{ city.name }}</Head>

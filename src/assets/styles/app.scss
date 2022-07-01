@@ -27,6 +27,11 @@
     padding: 0;
 }
 
+.content {
+    position: relative;
+    min-height: 80vh;
+}
+
 .page__content {
     padding: 3rem 0 6rem;
 }

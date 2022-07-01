@@ -1,39 +1,42 @@
 <script setup>
 import Button from "../../../../components/ui/button/Button.vue";
 import {useRouter, useRoute} from "vue-router";
-import {computed} from "vue";
-import {useCitiesStore} from "../../../../stores/cities";
+import {computed, onBeforeMount} from "vue";
 import Head from "../../../../components/ui/head/Head.vue";
 import Rating from "../../../../components/ui/rating/Rating.vue";
 import ImageContact from "./components/ImageContact.vue";
 import SubHead from "../../../../components/ui/head/SubHead.vue";
 import OrdersContact from "./components/OrdersContact.vue";
-import {useQueuesStore} from "../../../../stores/queues";
+import {useAddressStore} from "../../../../stores/address";
 
 const router = useRouter();
 const route = useRoute();
-const cities = useCitiesStore();
-const queues = useQueuesStore();
-
-const city = computed(() => {
-    return cities.getByAlias(route.params.city);
-});
+const addresses = useAddressStore();
 
 const address = computed(() => {
-    return city.value.addresses.find(address => address.alias === route.params.address)
+    return addresses.getAddress;
 });
 
+const ratings = computed(() => {
+    return addresses.getRating
+})
+
 const queuesList = computed(() => {
-    return queues.getByAlias(address.value.alias).list;
+    return addresses.getQueues;
 });
 
 const backUrl = computed(() => {
-    return `/${ city.value.alias }/contacts`;
+    return `/${ address.value.city.alias }/contacts`;
 });
+
+onBeforeMount(() => {
+    addresses.load(route.params.city, route.params.address);
+})
+
 </script>
 
 <template>
-    <div class="page__content">
+    <div class="page__content" v-if="address">
         <div class="page__header">
             <div>
                 <Button :href="backUrl" class="btn_default" icon="arrow-left">К списку пиццерий</Button>
@@ -41,7 +44,7 @@ const backUrl = computed(() => {
 
             <div class="mt-6 mb-5">
                 <Head>{{ address.title }}</Head>
-                <rating class="mt-1" :rating="address.rating" />
+                <rating class="mt-1" :rating="ratings" />
             </div>
         </div>
 
@@ -49,7 +52,7 @@ const backUrl = computed(() => {
             <div>
                 <p class="flex items-center">
                     <span class="contact__rec mr-2"></span>
-                    {{ city.name }}, {{ address.address }}
+                    {{ address.city.name }}, {{ address.address }}
                 </p>
 
                 <image-contact :alias="address.alias" class="mt-2" />
@@ -60,7 +63,14 @@ const backUrl = computed(() => {
             </div>
 
             <div>
-                <p>{{ address.address }}</p>
+                <p v-if="address.metro">
+                    <span class="text-red-500 font-bold">
+                        М
+                    </span>
+                    {{ address.metro }}
+                </p>
+
+                <p class="mt-4">{{ address.address }}</p>
 
                 <p class="mt-4 text-sm">Доставка и самовывоз</p>
                 <p>{{ address.time.delivery.from }} — {{ address.time.delivery.to }}</p>
