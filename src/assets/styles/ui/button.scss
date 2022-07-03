@@ -38,3 +38,14 @@
         color: $btn-default-text-hover;
     }
 }
+
+.btn_primary {
+    background-color: $btn-primary;
+    color: $btn-primary-text;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: $btn-primary-hover;
+        color: $btn-primary-text;
+    }
+}

@@ -1,6 +1,6 @@
 <script setup>
-import logoImage from '../../../../src/assets/images/logo.svg';
 
+import logoImage from '../../../../src/assets/images/logo.svg';
 
 </script>
 

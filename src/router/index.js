@@ -8,7 +8,7 @@ import dashboardAuth from './dashboard/auth';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [...sitePages, ...dashboardPages, ...dashboardAuth, ...siteError],
+    routes: [...dashboardPages, ...dashboardAuth, ...sitePages, ...siteError],
     scrollBehavior(to, from, savedPosition) {
         return savedPosition || { top: 0 }
     }

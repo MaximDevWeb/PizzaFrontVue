@@ -1,10 +1,12 @@
 export default [
     {
-        path: '/dashboard/login',
-        name: 'login',
-        component: () => import('../../views/pages/auth/Login.vue'),
-        meta: {
-            layout: 'AuthLayout'
-        }
+        path: '/auth',
+        component: () => import("../../views/layouts/AuthLayout.vue"),
+        children: [
+            {
+                path: 'login',
+                component: () => import('../../views/pages/auth/Login.vue')
+            }
+        ]
     }
 ];

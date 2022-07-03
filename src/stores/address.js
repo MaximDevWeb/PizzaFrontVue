@@ -1,5 +1,4 @@
 import {defineStore} from "pinia";
-import {useConfigStore} from "./config";
 import {useMainStore} from "./main";
 import lodash from 'lodash';
 import router from "../router";
@@ -10,7 +9,6 @@ export const useAddressStore = defineStore({
     state: () => ({
         address: null,
 
-        config: useConfigStore(),
         main: useMainStore()
     }),
 
@@ -39,7 +37,7 @@ export const useAddressStore = defineStore({
        async load(city, address) {
            this.main.setLoad(true);
 
-           const url = `${ this.config.getDomain }/${ city }/addresses/${ address }`;
+           const url = `${ import.meta.env.VITE_DOMAIN }/${ city }/addresses/${ address }`;
            const response = await fetch(url);
 
            this.main.setLoad(false);
@@ -47,7 +45,7 @@ export const useAddressStore = defineStore({
            if (response.ok) {
                this.address = (await response.json()).data;
            } else {
-               router.push('/404');
+               await router.push('/404');
            }
        }
     }
