@@ -7,17 +7,31 @@ describe('CityContact', () => {
     const wrapper = mount(ItemContact, {
         props: {
             address: {
-                title: 'Адлер',
-                address: 'ул. Кирова, 23',
-                alias: 'kirova-23',
+                id: 131,
+                title: "Чехова",
+                address: "ул. Чехова, 33",
+                alias: "ul-cexova-33",
+                metro: "Парк Победы",
                 time: {
-                    delivery: {from: '10:00', to: '23:00'},
-                    restaurant: {from: '10:00', to: '23:00'}
+                    delivery: {
+                        to: "23:00",
+                        from: "10:00"
+                    },
+                    restaurant: {
+                        to: "23:00",
+                        from: "10:00"
+                    }
                 },
-                rating: {
-                    timer: 33,
-                    stars: 4.67
-                }
+                ratings: [
+                    {
+                        timer: 34,
+                        stars: 3
+                    },
+                    {
+                        timer: 41,
+                        stars: 4
+                    }
+                ]
             }
         },
         global: {
@@ -25,12 +39,9 @@ describe('CityContact', () => {
         }
     });
 
-    it('test text link', async () => {
-        expect(wrapper.find('a').text()).equals('Адлер');
-    });
 
     it('test links', async () => {
         await router.push('/volgograd/contacts');
-        expect(wrapper.find('a').attributes('href')).equals('/volgograd/contacts/kirova-23');
+        expect(wrapper.find('a').attributes('href')).equals('/volgograd/contacts/ul-cexova-33');
     });
 });

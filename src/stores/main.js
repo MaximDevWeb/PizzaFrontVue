@@ -4,16 +4,21 @@ export const useMainStore = defineStore({
     id: 'main',
 
     state: () => ({
-        load: false
+        load: false,
+        select: false
     }),
 
     getters: {
-        getLoad: (state) => state.load
+        getLoad: (state) => state.load,
+        getSelect: (state) => state.select
     },
 
     actions: {
         setLoad(status) {
             this.load = status;
+        },
+        setSelect(select) {
+            this.select = select;
         }
     }
 });

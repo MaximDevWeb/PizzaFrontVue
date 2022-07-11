@@ -5,6 +5,7 @@ import {useMainStore} from "../../stores/main";
 import {useRoute} from "vue-router";
 import {onBeforeMount} from "vue";
 import {useCitiesStore} from "../../stores/cities";
+import CitySelect from "../../components/site/city/CitySelect.vue";
 
 const route = useRoute();
 const main = useMainStore();
@@ -17,6 +18,10 @@ onBeforeMount(() => {
 </script>
 
 <template>
+    <transition>
+        <city-select v-show="main.getSelect" />
+    </transition>
+
     <header>
         <Header />
     </header>

@@ -2,8 +2,10 @@
 import Rating from "../../ui/rating/Rating.vue";
 import {useCitiesStore} from "../../../stores/cities";
 import {computed} from "vue";
+import {useMainStore} from "../../../stores/main";
 
 const cities = useCitiesStore();
+const main = useMainStore();
 
 const city = computed(() => {
     return cities.getCity;
@@ -12,15 +14,19 @@ const city = computed(() => {
 const cityRating = computed(() => {
     return cities.getRating;
 })
+
+const showSelect = () => {
+    main.setSelect(true);
+}
 </script>
 
 <template>
     <div v-if="city" class="ml-10">
         <p class="text-lg leading-tight">
             Доставка пиццы
-            <router-link class="link_orange" to="/select-city">
+            <a href="#" class="link_orange" @click.prevent="showSelect">
                 {{ city.name }}
-            </router-link>
+            </a>
         </p>
         <rating :rating="cityRating" />
     </div>
