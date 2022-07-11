@@ -3,7 +3,7 @@ import Header from "../../components/site/header/Header.vue";
 import PreloaderLayouts from "./PreloaderLayouts.vue";
 import {useMainStore} from "../../stores/main";
 import {useRoute} from "vue-router";
-import {onBeforeMount} from "vue";
+import {onBeforeMount, watch, watchEffect} from "vue";
 import {useCitiesStore} from "../../stores/cities";
 import CitySelect from "../../components/site/city/CitySelect.vue";
 
@@ -11,10 +11,10 @@ const route = useRoute();
 const main = useMainStore();
 const cities = useCitiesStore();
 
-onBeforeMount(() => {
-    cities.loadCity(route.params.city);
+watchEffect(async () => {
+    const city = route.params.city;
+    cities.loadCity(city);
 })
-
 </script>
 
 <template>
