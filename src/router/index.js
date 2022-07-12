@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from 'vue-router';
 
 // Масссивы роутов
 import sitePages from './site/pages';
@@ -12,6 +12,6 @@ const router = createRouter({
     scrollBehavior(to, from, savedPosition) {
         return savedPosition || { top: 0 }
     }
-})
+});
 
 export default router

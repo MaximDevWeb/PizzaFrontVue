@@ -1,10 +1,10 @@
 <script setup>
 import Header from "../../components/site/header/Header.vue";
 import PreloaderLayouts from "./PreloaderLayouts.vue";
-import {useMainStore} from "../../stores/main";
 import {useRoute} from "vue-router";
-import {onBeforeMount, watch, watchEffect} from "vue";
+import {watchEffect} from "vue";
 import {useCitiesStore} from "../../stores/cities";
+import {useMainStore} from "../../stores/main"
 import CitySelect from "../../components/site/city/CitySelect.vue";
 
 const route = useRoute();
@@ -12,8 +12,18 @@ const main = useMainStore();
 const cities = useCitiesStore();
 
 watchEffect(async () => {
+    /**
+     * Наблюдаем за выбранным городом
+     * и обновляем данные приего изменении
+     */
     const city = route.params.city;
     cities.loadCity(city);
+
+    /**
+     * Скрываем окно выбора города
+     * при изменение города
+     */
+    main.setSelect(false);
 })
 </script>
 

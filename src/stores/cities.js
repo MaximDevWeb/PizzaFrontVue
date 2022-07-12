@@ -2,7 +2,6 @@ import {defineStore} from "pinia";
 import {useMainStore} from "./main";
 import lodash from "lodash";
 import router from "../router";
-import ObjectGroup from "../modules/ObjectGroup"
 
 export const useCitiesStore = defineStore({
     id: 'cities',
@@ -17,22 +16,6 @@ export const useCitiesStore = defineStore({
     getters: {
         getCity: (state) => state.city,
         getCities: (state) => state.cities,
-        getAbcList: (state) => {
-            return (search) => {
-
-                // Поиск по поисковому запросу
-                let list = state.cities.data.filter(item => {
-                    return RegExp(search, 'i').test(item.name);
-                });
-
-                list = ObjectGroup.ABCGroup(list, 'name');
-
-                // Сортируем города по алфавиту в списке
-                list.forEach(item => item.cities = lodash.sortBy(item.cities, ['name']));
-
-                return lodash.sortBy(list, ['symbol']);
-            }
-        },
         getRating: (state) => {
             let stars = [];
             let timer = [];
