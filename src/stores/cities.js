@@ -36,12 +36,9 @@ export const useCitiesStore = defineStore({
 
     actions: {
         async loadCity(city) {
-            this.main.setLoad(true);
 
             const url = `${ import.meta.env.VITE_DOMAIN }/cities/${ city }`;
             const response = await fetch(url);
-
-            this.main.setLoad(false);
 
             if (response.ok) {
                 this.city = (await response.json()).data;
@@ -51,12 +48,9 @@ export const useCitiesStore = defineStore({
         },
 
         async loadCities() {
-            this.main.setLoad(true);
 
             const url = `${ import.meta.env.VITE_DOMAIN}/cities`;
             const response = await fetch(url);
-
-            this.main.setLoad(false);
 
             if (response.ok) {
                 this.cities = await response.json();

@@ -35,12 +35,9 @@ export const useAddressStore = defineStore({
 
     actions: {
        async load(city, address) {
-           this.main.setLoad(true);
 
            const url = `${ import.meta.env.VITE_DOMAIN }/${ city }/addresses/${ address }`;
            const response = await fetch(url);
-
-           this.main.setLoad(false);
 
            if (response.ok) {
                this.address = (await response.json()).data;
