@@ -21,7 +21,7 @@ const showSelect = () => {
 </script>
 
 <template>
-    <div v-if="city" class="ml-10">
+    <div class="ml-10">
         <p class="text-lg leading-tight">
             Доставка пиццы
             <a href="#" class="link_orange" @click.prevent="showSelect">

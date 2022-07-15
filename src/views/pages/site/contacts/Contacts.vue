@@ -65,7 +65,7 @@ const filterResultString = computed(() => {
 </script>
 
 <template>
-    <div class="page__content" v-if="city">
+    <div class="page__content">
         <div class="contacts__header">
             <div>
                 <Head>{{ city.name }}</Head>

@@ -2,14 +2,24 @@
 import Header from "../../components/site/header/Header.vue";
 import PreloaderLayouts from "./PreloaderLayouts.vue";
 import {useRoute} from "vue-router";
-import {watchEffect} from "vue";
+import {computed, watchEffect} from "vue";
 import {useCitiesStore} from "../../stores/cities";
 import {useMainStore} from "../../stores/main"
 import CitySelect from "../../components/site/city/CitySelect.vue";
+import MenuMain from "../../components/site/menu/MenuMain.vue";
 
 const route = useRoute();
 const main = useMainStore();
 const cities = useCitiesStore();
+
+/**
+ * Определяем переменную city
+ * для глобального условия отрисовки
+ * @type {ComputedRef<*>}
+ */
+const city = computed(() => {
+    return cities.getCity;
+})
 
 watchEffect(async () => {
     /**
@@ -28,20 +38,24 @@ watchEffect(async () => {
 </script>
 
 <template>
-    <transition>
-        <city-select v-show="main.getSelect" />
-    </transition>
+    <template v-if="city">
+        <transition>
+            <city-select v-show="main.getSelect" />
+        </transition>
 
-    <header>
-        <Header />
-    </header>
+        <header>
+            <Header />
+        </header>
 
-    <main class="container content">
-        <router-view />
-        <preloader-layouts v-if="main.getLoad"/>
-    </main>
+        <menu-main />
 
-    <footer>
-        <p>Copyright 2022</p>
-    </footer>
+        <main class="container content">
+            <router-view />
+            <preloader-layouts v-if="main.getLoad"/>
+        </main>
+
+        <footer>
+            <p>Copyright 2022</p>
+        </footer>
+    </template>
 </template>
