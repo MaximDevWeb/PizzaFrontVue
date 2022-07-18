@@ -4,8 +4,8 @@ import Icon from "../../ui/icon/Icon.vue";
 const props = defineProps({
     counter: {
         type: Number,
-        default: 0
-    }
+        default: 0,
+    },
 });
 </script>
 
