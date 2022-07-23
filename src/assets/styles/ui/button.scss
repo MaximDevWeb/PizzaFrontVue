@@ -2,6 +2,7 @@
     display: inline-block;
     padding: 0.5rem 1.25rem;
     border-radius: 2rem;
+    transition: all 0.3s;
 
     span {
         display: flex;
@@ -31,7 +32,6 @@
 .btn_default {
     background-color: $btn-default;
     color: $btn-default-text;
-    transition: all 0.3s;
 
     &:hover {
         background-color: $btn-default-hover;
@@ -42,10 +42,19 @@
 .btn_primary {
     background-color: $btn-primary;
     color: $btn-primary-text;
-    transition: all 0.3s;
 
     &:hover {
         background-color: $btn-primary-hover;
         color: $btn-primary-text;
+    }
+}
+
+.btn-light {
+    background-color: $btn-light;
+    color: $btn-light-text;
+
+    &:hover {
+        background-color: $btn-light-hover;
+        color: $btn-light-text;
     }
 }

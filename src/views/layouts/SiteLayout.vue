@@ -8,6 +8,7 @@ import { useMainStore } from "../../stores/main";
 import CitySelect from "../../components/site/city/CitySelect.vue";
 import MenuMain from "../../components/site/menu/MenuMain.vue";
 import MobileMainMenu from "../../components/site/menu/MobileMainMenu.vue";
+import SecretBuyer from "../../components/site/footer/SecretBuyer.vue";
 
 const route = useRoute();
 const main = useMainStore();
@@ -25,7 +26,7 @@ const city = computed(() => {
 watchEffect(async () => {
     /**
      * Наблюдаем за выбранным городом
-     * и обновляем данные приего изменении
+     * и обновляем данные при его изменении
      */
     const city = route.params.city;
     cities.loadCity(city);
@@ -58,6 +59,7 @@ watchEffect(async () => {
         </main>
 
         <footer>
+            <secret-buyer />
             <p>Copyright 2022</p>
         </footer>
     </template>

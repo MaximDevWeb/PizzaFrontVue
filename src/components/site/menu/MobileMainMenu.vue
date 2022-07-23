@@ -46,7 +46,7 @@ onUpdated(() => {
 
 <template>
     <nav class="mobile-main-menu md:hidden block">
-        <div class="container mobile-main-menu__wrapper mobile-scroll">
+        <div class="container mobile-main-menu__wrapper">
             <ul class="mobile-main-menu__nav">
                 <li class="mobile-main-menu__logo">
                     <img :src="logoImage" />
