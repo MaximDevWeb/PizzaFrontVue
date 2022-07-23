@@ -31,7 +31,7 @@
 }
 
 .main-menu_scroll {
-    box-shadow: rgba(6,5,50,0.1) 0 4px 30px;
+    box-shadow: rgba(6, 5, 50, 0.1) 0 4px 30px;
 
     .main-menu__nav {
         transform: translateX(0);
@@ -58,7 +58,6 @@
 }
 
 .menu-cart__button:hover {
-
     svg {
         transform: translateX(0);
         opacity: 1;
@@ -75,5 +74,68 @@
     align-items: center;
     padding-left: 0.5rem;
     margin-left: 0.5rem;
-    border-left: 1px solid rgba(255,255,255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.mobile-main-menu {
+    position: sticky;
+    top: -1px;
+    background-color: white;
+    z-index: 20;
+
+    a {
+        background-color: $bg-grey;
+        padding: 0.25rem 1rem;
+        margin: 0 0.5rem 0 0;
+        border-radius: 16px;
+        color: $text-grey;
+        white-space: nowrap;
+        font-size: 0.875rem;
+    }
+
+    a.router-link-exact-active {
+        color: $orange;
+        background-color: $bg-orange;
+    }
+}
+
+.mobile-main-menu__wrapper {
+    overflow: auto;
+}
+
+.mobile-main-menu__nav {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+
+    li {
+        transform: translateX(-40px);
+        transition: all 0.3s;
+    }
+}
+
+.mobile-main-menu__logo {
+    flex: none;
+    margin-right: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s;
+
+    img {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+.mobile-main-menu_scroll {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+
+    .mobile-main-menu__nav {
+        li {
+            transform: translateX(0);
+        }
+    }
+
+    .mobile-main-menu__logo {
+        opacity: 1;
+    }
 }

@@ -1,14 +1,12 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
     <div class="h-64"></div>
-    <div id="pizza" class="h-screen product__list" ref="product">
+    <div id="pizza" class="h-screen product__list">
         <h1>Пицца</h1>
     </div>
 
-    <div id="combo" class="h-screen product__list" ref="product">
+    <div id="combo" class="h-screen product__list">
         <h1>Комбо</h1>
     </div>
 

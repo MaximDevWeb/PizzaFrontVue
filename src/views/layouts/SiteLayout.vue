@@ -1,12 +1,13 @@
 <script setup>
 import Header from "../../components/site/header/Header.vue";
 import PreloaderLayouts from "./PreloaderLayouts.vue";
-import {useRoute} from "vue-router";
-import {computed, watchEffect} from "vue";
-import {useCitiesStore} from "../../stores/cities";
-import {useMainStore} from "../../stores/main"
+import { useRoute } from "vue-router";
+import { computed, watchEffect } from "vue";
+import { useCitiesStore } from "../../stores/cities";
+import { useMainStore } from "../../stores/main";
 import CitySelect from "../../components/site/city/CitySelect.vue";
 import MenuMain from "../../components/site/menu/MenuMain.vue";
+import MobileMainMenu from "../../components/site/menu/MobileMainMenu.vue";
 
 const route = useRoute();
 const main = useMainStore();
@@ -19,7 +20,7 @@ const cities = useCitiesStore();
  */
 const city = computed(() => {
     return cities.getCity;
-})
+});
 
 watchEffect(async () => {
     /**
@@ -34,7 +35,7 @@ watchEffect(async () => {
      * при изменение города
      */
     main.setSelect(false);
-})
+});
 </script>
 
 <template>
@@ -49,9 +50,11 @@ watchEffect(async () => {
 
         <menu-main />
 
+        <mobile-main-menu />
+
         <main class="container content">
             <router-view />
-            <preloader-layouts v-if="main.getLoad"/>
+            <preloader-layouts v-if="main.getLoad" />
         </main>
 
         <footer>
