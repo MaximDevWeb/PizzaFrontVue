@@ -1,14 +1,16 @@
 $card-grey: #f3f3f7;
 $orange: #ff6900;
 $orange-hover: #d15700;
-$bg-orange: #fff0e6;
 $yellow: #ffd200;
 $border: #cbd5e1;
 $red: #ff3b30;
-$bg-grey: $card-grey;
 $text-grey: #5c6370;
+$text-wight: rgba(255, 255, 255, 0.7);
 
 $bg-city-selector: rgba(0, 0, 0, 0.5);
+$bg-grey: $card-grey;
+$bg-orange: #fff0e6;
+$bg-black: #181818;
 
 $btn-default: #f3f4f6;
 $btn-default-hover: #e5e7eb;
@@ -22,3 +24,8 @@ $btn-primary-text: #fff;
 $btn-light: rgba(255, 255, 255, 0.9);
 $btn-light-hover: rgba(255, 255, 255, 0.75);
 $btn-light-text: $orange;
+
+$btn-social: rgba(255, 255, 255, 0.15);
+$btn-social-hover: rgba(255, 255, 255, 0.3);
+$btn-social-text: rgba(255, 255, 255, 0.7);
+$btn-social-text-hover: rgba(255, 255, 255, 0.9);

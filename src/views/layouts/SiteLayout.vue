@@ -9,6 +9,7 @@ import CitySelect from "../../components/site/city/CitySelect.vue";
 import MenuMain from "../../components/site/menu/MenuMain.vue";
 import MobileMainMenu from "../../components/site/menu/MobileMainMenu.vue";
 import SecretBuyer from "../../components/site/footer/SecretBuyer.vue";
+import FooterMain from "../../components/site/footer/FooterMain.vue";
 
 const route = useRoute();
 const main = useMainStore();
@@ -60,7 +61,7 @@ watchEffect(async () => {
 
         <footer>
             <secret-buyer />
-            <p>Copyright 2022</p>
+            <footer-main />
         </footer>
     </template>
 </template>

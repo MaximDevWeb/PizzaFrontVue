@@ -58,3 +58,13 @@
         color: $btn-light-text;
     }
 }
+
+.btn-social {
+    background-color: $btn-social;
+    color: $btn-social-text;
+
+    &:hover {
+        background-color: $btn-social-hover;
+        color: $btn-social-text-hover;
+    }
+}
