@@ -1,16 +1,16 @@
 <script setup>
 import Icon from "../../ui/icon/Icon.vue";
-import logoImage from '../../../assets/images/logo.svg';
-import {computed, onBeforeMount, ref} from "vue";
+import logoImage from "../../../assets/images/logo.svg";
+import { computed, onBeforeMount, ref } from "vue";
 import Input from "../../ui/form/Input.vue";
-import {useCitiesStore} from "../../../stores/cities";
-import {useMainStore} from "../../../stores/main";
+import { useCitiesStore } from "../../../stores/cities";
+import { useMainStore } from "../../../stores/main";
 import CitySelectList from "./CitySelectList.vue";
 
-const cities = useCitiesStore();
-const main = useMainStore();
+const citiesStore = useCitiesStore();
+const mainStore = useMainStore();
 
-let search = ref('');
+let search = ref("");
 
 /**
  * Получаем список городов из
@@ -18,47 +18,52 @@ let search = ref('');
  * @type {ComputedRef<*>}
  */
 const citiesCollection = computed(() => {
-    return cities.getCities;
+    return citiesStore.getCities;
+});
+
+const data = computed(() => {
+    return mainStore.getData;
 });
 
 const closeSelect = () => {
-    main.setSelect(false);
-}
+    mainStore.setSelect(false);
+};
 
 /**
  * Вызываем загрузчик списка
  * городов перед отрисовкой компонента
  */
 onBeforeMount(() => {
-    cities.loadCities();
+    citiesStore.loadCities();
 });
-
 </script>
 
 <template>
     <div class="city-selector" v-if="citiesCollection">
-        <div class="w-7/12 h-5/6 bg-white rounded-2xl relative p-8 flex flex-col">
+        <div
+            class="w-7/12 h-5/6 bg-white rounded-2xl relative p-8 flex flex-col"
+        >
             <div class="city-selector__close" @click.prevent="closeSelect">
                 <icon name="close"></icon>
             </div>
 
             <div class="flex items-center">
-                <img :src="logoImage" alt="Dodo pizza" class="city-selector__logo mr-4">
+                <img
+                    :src="logoImage"
+                    alt="Dodo pizza"
+                    class="city-selector__logo mr-4"
+                />
 
                 <p class="text-4xl">
-                    {{ citiesCollection.addresses_count }}
+                    {{ data.location.pizzerias }}
                     пиццерий в
-                    {{ citiesCollection.cities_count }}
+                    {{ data.location.cities }}
                     городах
                 </p>
             </div>
 
             <div class="mt-4">
-                <Input
-                    placeholder="поиск"
-                    icon="search"
-                    v-model="search"
-                />
+                <Input placeholder="поиск" icon="search" v-model="search" />
             </div>
 
             <div class="mt-4 text-2xl">

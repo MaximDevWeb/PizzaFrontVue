@@ -3,7 +3,7 @@ import Icon from "../../ui/icon/Icon.vue";
 </script>
 
 <template>
-    <div class="footer-main__copyright pt-6">
+    <div class="footer-main__copyright pt-6 mt-6">
         <div class="footer-main__copyright-menu">
             <p class="md:mt-0 mt-4">
                 <span class="uppercase font-bold">Додо Пицца</span> © 2022

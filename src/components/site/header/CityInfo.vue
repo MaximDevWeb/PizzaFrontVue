@@ -1,23 +1,23 @@
 <script setup>
 import Rating from "../../ui/rating/Rating.vue";
-import {useCitiesStore} from "../../../stores/cities";
-import {computed} from "vue";
-import {useMainStore} from "../../../stores/main";
+import { useCitiesStore } from "../../../stores/cities";
+import { computed } from "vue";
+import { useMainStore } from "../../../stores/main";
 
-const cities = useCitiesStore();
-const main = useMainStore();
+const citiesStore = useCitiesStore();
+const mainStore = useMainStore();
 
 const city = computed(() => {
-    return cities.getCity;
+    return citiesStore.getCity;
 });
 
 const cityRating = computed(() => {
-    return cities.getRating;
-})
+    return citiesStore.getRating;
+});
 
 const showSelect = () => {
-    main.setSelect(true);
-}
+    mainStore.setSelect(true);
+};
 </script>
 
 <template>

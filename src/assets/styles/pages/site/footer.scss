@@ -10,11 +10,10 @@
 
 .footer-main {
     background-color: $bg-black;
-    color: white;
+    color: $text-wight;
 }
 
 .footer-main__copyright {
-    color: $text-wight;
     border-top: 1px solid $btn-social;
     display: flex;
     align-items: center;

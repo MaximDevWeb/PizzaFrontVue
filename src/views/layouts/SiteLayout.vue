@@ -2,7 +2,7 @@
 import Header from "../../components/site/header/Header.vue";
 import PreloaderLayouts from "./PreloaderLayouts.vue";
 import { useRoute } from "vue-router";
-import { computed, watchEffect } from "vue";
+import { computed, onBeforeMount, onMounted, watchEffect } from "vue";
 import { useCitiesStore } from "../../stores/cities";
 import { useMainStore } from "../../stores/main";
 import CitySelect from "../../components/site/city/CitySelect.vue";
@@ -12,8 +12,8 @@ import SecretBuyer from "../../components/site/footer/SecretBuyer.vue";
 import FooterMain from "../../components/site/footer/FooterMain.vue";
 
 const route = useRoute();
-const main = useMainStore();
-const cities = useCitiesStore();
+const mainStore = useMainStore();
+const citiesStore = useCitiesStore();
 
 /**
  * Определяем переменную city
@@ -21,7 +21,7 @@ const cities = useCitiesStore();
  * @type {ComputedRef<*>}
  */
 const city = computed(() => {
-    return cities.getCity;
+    return citiesStore.getCity;
 });
 
 watchEffect(async () => {
@@ -30,20 +30,28 @@ watchEffect(async () => {
      * и обновляем данные при его изменении
      */
     const city = route.params.city;
-    cities.loadCity(city);
+    citiesStore.loadCity(city);
 
     /**
      * Скрываем окно выбора города
      * при изменение города
      */
-    main.setSelect(false);
+    mainStore.setSelect(false);
+});
+
+/**
+ * Вызываем загрузчик основных
+ * данных с сайта
+ */
+onBeforeMount(() => {
+    mainStore.loadData();
 });
 </script>
 
 <template>
     <template v-if="city">
         <transition>
-            <city-select v-show="main.getSelect" />
+            <city-select v-show="mainStore.getSelect" />
         </transition>
 
         <header>
@@ -56,7 +64,7 @@ watchEffect(async () => {
 
         <main class="container content">
             <router-view />
-            <preloader-layouts v-if="main.getLoad" />
+            <preloader-layouts v-if="citiesStore.getLoad" />
         </main>
 
         <footer>
