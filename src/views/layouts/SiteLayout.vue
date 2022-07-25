@@ -1,6 +1,5 @@
 <script setup>
 import Header from "../../components/site/header/Header.vue";
-import PreloaderLayouts from "./PreloaderLayouts.vue";
 import { useRoute } from "vue-router";
 import { computed, onBeforeMount, onMounted, watchEffect } from "vue";
 import { useCitiesStore } from "../../stores/cities";
@@ -64,7 +63,6 @@ onBeforeMount(() => {
 
         <main class="container content">
             <router-view />
-            <preloader-layouts v-if="citiesStore.getLoad" />
         </main>
 
         <footer>

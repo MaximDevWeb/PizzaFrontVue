@@ -5,10 +5,6 @@ import { computed } from "vue";
 const mainStore = useMainStore();
 
 const data = computed(() => mainStore.getData);
-
-const close = () => {
-    console.log("close");
-};
 </script>
 
 <template>
